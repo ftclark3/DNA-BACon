@@ -1,5 +1,2 @@
 # DIRECTORIES TO IGNORE
-linkers/
-models/
-input/
 __pycache__/

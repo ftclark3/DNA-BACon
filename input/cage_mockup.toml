@@ -1,0 +1,13 @@
+[[cage]]
+	linker = "benzene"
+	name = "pres8-11tetrahedron"
+	min = true
+	# sequence formatting for junction may be different
+	sequence = [
+        ["AAAA", "AAAAAAAA", "AAAAAA"],
+				["AAAA", "AAAAAAAA", "AAAAAA"],
+				["AAAA", "AAAAAAAA", "AAAAAA"]
+        ]
+	keep_sequence = ["TC"] # empty string to delete all complementary DNA
+	add_name = ["new.pdb"] # empty string to add no functional groups
+	add_num = [26] # equal in length to keep_sequence and add_name
