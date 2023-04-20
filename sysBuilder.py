@@ -1,15 +1,12 @@
-from shutil import copyfile, rmtree
-from os import mkdir, chdir, getcwd
-import subprocess
 import sys
+import subprocess
+from os import mkdir, chdir, getcwd
+from shutil import copyfile, rmtree
 
-''' Class to run MD system builders on cage models '''
+## syself.stem builder class
+# allows user to run syself.stem builder on generated model
 
-##------------------------------------------------------------------------------------------------------------
 class sysBuilder:
-    # st is a list that contains a structure and its name
-    # path should be the desmond working directory
-    # constructor
     def __init__(self, st, path):
         self.st = st
         self.path = path
@@ -26,14 +23,13 @@ class sysBuilder:
             rmtree(self.path + self.st[1] + "_setup/")
             mkdir(self.path + self.st[1] + "_setup/")
 
-    ##------------------------------------------------------------------------------------------------------------
     # method to move mae to job folder
     def moveMAE(self):
         copyfile(self.st[0], self.dst)
 
-    ##------------------------------------------------------------------------------------------------------------
     # method to write .msj
     def writeMSJ(self):
+        # write msj to job folder
         msg = '''task {
 	task = "desmond:auto"
 }
@@ -60,7 +56,6 @@ assign_forcefield {
         msj.write(msg)
         msj.close()
 
-    ##------------------------------------------------------------------------------------------------------------
     # method to run system builder
     def run(self):
         subprocess.Popen(self.bashCommand, shell=True, cwd=self.path + self.st[1] + "_setup")

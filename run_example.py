@@ -1,7 +1,7 @@
-from sysBuilder import sysBuilder
+import build
 from random import randint
 from mdSim import mdSim
-import build
+from sysBuilder import sysBuilder
 
 # this is an example script that shows how to create a cage model and simulate it
 ##------------------------------------------------------------------------------------------------------------

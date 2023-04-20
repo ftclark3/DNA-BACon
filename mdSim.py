@@ -1,14 +1,11 @@
-from shutil import copyfile, rmtree
-from os import mkdir, chdir, getcwd
+import sys
 import subprocess
 import os.path
 import time
-import sys
-
-''' Class to run MD simulation with Desmond using built cage '''
-
+from os import mkdir, chdir, getcwd
+from shutil import copyfile, rmtree
+## class to run md simulation on built system
 class mdJob:
-    ##------------------------------------------------------------------------------------------------------------
     # constructor
     def __init__(self, st, path):
         self.st = st
@@ -29,14 +26,12 @@ class mdJob:
             rmtree(self.dir + "/")
             mkdir(self.dir + "/")
 
-    ##------------------------------------------------------------------------------------------------------------
     # method to move out.cms to job folder
     def moveCMS(self):
         while not os.path.exists(self.location):
             time.sleep(20)
         copyfile(self.location, self.dst)
 
-    ##------------------------------------------------------------------------------------------------------------
     # method to build msj
     def writeMSJ(self):
         msg = '''
@@ -165,8 +160,8 @@ simulate {
         msj.write(msg)
         msj.close()
 
-    ##------------------------------------------------------------------------------------------------------------
-    # method to build cfg, accepts dictionary of settings
+    # method to build cfg
+    # accepts dictionary of settings
     def writeCFG(self, jobSettings):
         seed = jobSettings["seed"]
         time = jobSettings["time"]
@@ -249,7 +244,6 @@ trajectory = {
         msj.write(msg)
         msj.close()
 
-    ##------------------------------------------------------------------------------------------------------------
     # method to run job
     def run(self):
         # print(self.path + self.st[1])
