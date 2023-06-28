@@ -69,13 +69,38 @@ def cage_builder(wall_list, edge, chain_length, linker_start, linker_end, resnum
     # combine the items of linkme1 and linkme2 in a new list called linkme, such that
     # the atom at each index of linkme is the linker atom that should be bonded
     # to the DNA atom at the same index of connectme
+    if len(wall_list) < 3:
+        print(f"You have requested {len(wall_list)} walls, but that doesn't really make sense,\
+                so this program doesn't know how to handle it. Exiting now")
+        raise SystemExit()
+    elif len(wall_list) > 8:
+        print(f"You have requested {len(wall_list)} walls, but this program has only been tested\
+                on cages of up to and including 8 walls. Depending on the structure of the individual walls,\
+                the assembly area may become increasingly crowded with increasing wall size, leading to errors.")
+    linkme = []
+    wall_list_length = len(wall_list)
+    for i in range(2,wall_list_length+1):
+        linkme.append(linkme1[wall_list_length-i])
+        linkme.append(linkme2[wall_list_length-i])
+    linkme.append(linkme1[wall_list_length-1])
+    linkme.append(linkme2[wall_list_length-1])
+    '''
     if len(wall_list) == 4:
         linkme = [linkme1[2],linkme2[2],linkme1[1],linkme2[1],linkme1[0],linkme2[0],linkme1[3],linkme2[3]]
     elif len(wall_list) == 3:
         linkme = [linkme1[1],linkme2[1],linkme1[0],linkme2[0],linkme1[2],linkme2[2]]
+    elif len(wall_list) == 5:
+        linkme = [linkme1[3],linkme2[3],linkme1[2],linkme2[2],linkme1[1],linkme2[1],linkme1[0],linkme2[0],linkme1[4],linkme2[4]]
+    elif len(wall_list) == 6:
+        linkme = [linkme1[4],linkme2[4],linkme1[3],linkme2[3],linkme1[2],linkme2[2],linkme1[1],linkme2[1],linkme1[0],linkme2[0],linkme1[5],linkme2[5]]
+    elif len(wall_list) == 7:
+        linkme = [linkme1[5],linkme2[5],linkme1[4],linkme2[4],linkme1[3],linkme2[3],linkme1[2],linkme2[2],linkme1[1],linkme2[1],linkme1[0],linkme2[0],linkme1[6],linkme2[6]]
     else: # invalid number of walls
-        print(f"Cages can have either 3 or 4 walls, but you have requested {len(wallList)} walls\n\tSee the User Guide for more details")
+        print(f"This program has only been tested on cages with 3-8 walls, but you have requested {len(wall_list)} walls\n\
+                If you really want more walls, you can go to the point of this message in the code and straightforwardly
+                add an additional elif statement following the pattern ")
         raise SystemExit()
+    '''
 
     # connect the walls by bonding the linker atoms to the DNA atoms
     # the atoms to bond will depend on the number of walls in the cage
