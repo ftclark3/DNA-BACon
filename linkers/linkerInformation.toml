@@ -9,7 +9,7 @@
 	linkerCenter = "O1"
 
 [[4T]]
-        file = "linkers/4T_no_3prime_phosphate.pdb"
+        file = "linkers/4T.pdb"
         linkerS = 8 # looks like an atom index
         linkerSName = "C3'" # atom.pdbname
         linkerSResnum = 2 
